@@ -149,7 +149,7 @@ details p{margin-top:12px;color:var(--muted)}
 .final img{width:96px;height:96px;border-radius:26px;box-shadow:0 14px 40px var(--glow);margin-bottom:20px;animation:bob 5s ease-in-out infinite}
 .final .cta{justify-content:center}
 footer{padding:40px 0 50px;color:var(--muted);font-size:14px;text-align:center}
-footer .fl{display:flex;gap:22px;justify-content:center;margin-bottom:12px;font-weight:600}
+footer .fl{display:flex;flex-wrap:wrap;gap:10px 22px;justify-content:center;margin-bottom:12px;font-weight:600}
 /* reveal */
 .rv{opacity:0;transform:translateY(34px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}
 .in.rv,.in .rv{opacity:1;transform:none}
@@ -160,6 +160,111 @@ footer .fl{display:flex;gap:22px;justify-content:center;margin-bottom:12px;font-
   .chip{display:none}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.badge{opacity:1;transform:none}}
+
+/* ===== Responsive overrides (layout only, no design changes) ===== */
+html{overflow-x:hidden;-webkit-text-size-adjust:100%}
+img,svg{max-width:100%}
+nav{top:max(14px,env(safe-area-inset-top))}
+.hero{overflow-x:clip}
+@media(min-width:1500px){.wrap{max-width:1280px}}
+@media(max-width:900px){
+  section{padding:70px 0}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .split{gap:36px}
+  .hero{gap:56px;padding-bottom:60px}
+  .nav{max-width:100%}
+  .final{padding:56px 24px}
+}
+@media(max-width:640px){
+  .wrap{padding:0 18px}
+  section{padding:56px 0}
+  .nav{padding:8px 8px 8px 12px;gap:8px}
+  .brand{font-size:15px;gap:8px}.brand img{width:30px;height:30px}
+  .tbtn{width:36px;height:36px;font-size:15px}
+  .btn{padding:10px 16px;font-size:13px}
+  .hero{padding-top:104px}
+  h1{letter-spacing:-1.2px;margin:16px 0}
+  h2{letter-spacing:-.8px}
+  .lead{font-size:17px}.sub{font-size:16px}
+  .cta{gap:14px;margin:26px 0 18px}
+  .trust{gap:8px 14px;font-size:12px}
+  .grid{grid-template-columns:1fr;gap:16px;margin-top:36px}
+  .steps{gap:16px;margin-top:36px}
+  .card,.step{padding:24px}
+  .stats{gap:12px}.stat{padding:18px 10px}.stat b{font-size:28px}.stat span{font-size:12px}
+  .health{padding:16px 18px}.hrow{font-size:14px}
+  .shots{gap:22px;margin-top:36px}
+  .cmp{padding:4px 16px}
+  .crow{grid-template-columns:1.5fr .8fr .8fr;font-size:13px;gap:6px;padding:14px 0}
+  .crow.h{font-size:10px;letter-spacing:.5px}
+  .final{padding:44px 20px}.final img{width:80px;height:80px}
+  details{padding:16px 18px}summary{gap:12px;font-size:15px}
+  footer .fl{flex-wrap:wrap;gap:10px 20px}
+  footer{padding:30px 0 40px}
+}
+@media(max-width:380px){
+  .brand{font-size:14px}
+  .btn{padding:9px 13px;font-size:12px}
+  .play{padding:7px 16px 7px 12px}.play b{font-size:19px}.play svg{width:26px;height:28px}
+  .shot,.mini{width:100%;max-width:260px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:340px){.stage{transform:scale(.88);transform-origin:top center;margin-bottom:-60px}}
+@media(max-height:500px) and (orientation:landscape){.hero{padding-top:100px}}
+
+/* ===== Mobile menu ===== */
+.menu,.mnav{display:none}
+.menu i{display:block;width:18px;height:2px;border-radius:2px;background:currentColor;transition:transform .3s,opacity .3s}
+.menu i+i{margin-top:4px}
+.menu[aria-expanded=true] i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.menu[aria-expanded=true] i:nth-child(2){opacity:0}
+.menu[aria-expanded=true] i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+@media(max-width:900px){
+  .menu{display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .mnav{display:flex;flex-direction:column;gap:4px;position:absolute;top:calc(100% + 8px);left:16px;right:16px;max-width:960px;margin:0 auto;padding:12px;border-radius:24px;opacity:0;visibility:hidden;transform:translateY(-10px);transition:opacity .3s,transform .3s,visibility .3s}
+  .mnav.open{opacity:1;visibility:visible;transform:none}
+  .mnav a:not(.btn){padding:14px 16px;border-radius:14px;font-weight:700;font-size:16px}
+  .mnav a:not(.btn):hover,.mnav a:not(.btn):active{background:var(--glass-bot);color:var(--accent-text)}
+  .mnav .mbtn{justify-content:center;margin-top:6px}
+}
+@media(max-width:480px){.navbtn{display:none}}
+@media(min-width:481px){.mbtn{display:none}}
+
+/* ===== Narrow-width safety (content never gets cut off) ===== */
+.hero>*,.split>*,.grid>*,.steps>*,.stats>*,.shots>*,.stage,.crow>*{min-width:0}
+h1,h2,h3,p,summary,.lead,.sub,.card,.step,.r,.hrow,.crow span,.s-name,.s-sub,.trust span{overflow-wrap:anywhere}
+.hero{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr)}
+.split{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.steps{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+.phone{width:min(290px,100%);height:auto;aspect-ratio:290/590}
+.shot,.mini{width:min(270px,100%)}
+.mini{height:auto;min-height:540px}
+.brand{min-width:0}
+@media(max-width:900px){
+  .hero,.split{grid-template-columns:minmax(0,1fr)}
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:minmax(0,1fr)}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:640px){.grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:340px){
+  .wrap{padding:0 12px}
+  h1{font-size:30px}h2{font-size:24px}
+  .lead,.sub{font-size:15px}
+  .card,.step{padding:18px}
+  .stat b{font-size:22px}.stat span{font-size:11px}
+  .crow{grid-template-columns:minmax(0,1.4fr) minmax(0,.7fr) minmax(0,.7fr);font-size:11px}
+  .s-name{font-size:24px}.avatar{width:80px;height:80px;font-size:32px}
+  .mini{padding:16px 12px}
+}
+@media(max-width:240px){
+  .brand{font-size:0}.tbtn{width:30px;height:30px}
+  .wrap{padding:0 8px}.nav{padding:6px}
+  h1{font-size:24px}h2{font-size:20px}
+}
 </style>
 </head>
 <body>
@@ -169,8 +274,11 @@ footer .fl{display:flex;gap:22px;justify-content:center;margin-bottom:12px;font-
   <a class="brand" href="#top"><img src="assets/icon.jpg" alt="Unmissed AI icon">Unmissed AI</a>
   <div class="links"><a href="#features">Features</a><a href="#how">How it works</a><a href="#reliable">Reliability</a><a href="#faq">FAQ</a></div>
   <div class="nav-r"><button class="tbtn" id="theme" aria-label="Toggle light and dark theme">◐</button>
-  <a class="btn" href="https://play.google.com/store/apps/details?id=com.unmissed.ai" target="_blank" rel="noopener">Get the app</a></div>
-</div></nav>
+  <a class="btn navbtn" href="https://play.google.com/store/apps/details?id=com.unmissed.ai" target="_blank" rel="noopener">Get the app</a>
+  <button class="tbtn menu" id="menu" aria-label="Open menu" aria-expanded="false" aria-controls="mnav"><i></i><i></i><i></i></button></div>
+</div>
+<div class="mnav glass" id="mnav"><a href="#features">Features</a><a href="#how">How it works</a><a href="#reliable">Reliability</a><a href="#faq">FAQ</a>
+  <a class="btn mbtn" href="https://play.google.com/store/apps/details?id=com.unmissed.ai" target="_blank" rel="noopener">Get the app</a></div></nav>
 
 <main id="top">
 <div class="wrap hero">
@@ -314,7 +422,7 @@ footer .fl{display:flex;gap:22px;justify-content:center;margin-bottom:12px;font-
 </main>
 
 <footer><div class="wrap">
-  <div class="fl"><a href="#features">Features</a><a href="#faq">FAQ</a><a href="https://play.google.com/store/apps/details?id=com.unmissed.ai" target="_blank" rel="noopener">Google Play</a></div>
+  <div class="fl"><a href="#features">Features</a><a href="#faq">FAQ</a><a href="https://play.google.com/store/apps/details?id=com.unmissed.ai" target="_blank" rel="noopener">Google Play</a><a href="https://hussainxdeveloper-hub.github.io/unmissed-ai-privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a><a href="https://hussainxdeveloper-hub.github.io/unmissed-ai-terms-conditions/" target="_blank" rel="noopener">Terms of Use</a></div>
   © <span id="y"></span> Unmissed AI. Google Play and the Google Play logo are trademarks of Google LLC.
 </div></footer>
 
@@ -335,6 +443,14 @@ footer .fl{display:flex;gap:22px;justify-content:center;margin-bottom:12px;font-
       if(e.target.dataset.n!==undefined)count(e.target);
       io.unobserve(e.target)}})},{threshold:.15});
   document.querySelectorAll('.rv,#hc,.stat b').forEach(function(el){io.observe(el)});
+
+  var mb=document.getElementById('menu'),mn=document.getElementById('mnav');
+  function setMenu(o){mn.classList.toggle('open',o);mb.setAttribute('aria-expanded',o);mb.setAttribute('aria-label',o?'Close menu':'Open menu')}
+  mb.onclick=function(e){e.stopPropagation();setMenu(!mn.classList.contains('open'))};
+  mn.addEventListener('click',function(e){if(e.target.closest('a'))setMenu(false)});
+  document.addEventListener('click',function(e){if(!mn.contains(e.target))setMenu(false)});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')setMenu(false)});
+  matchMedia('(min-width:901px)').addEventListener('change',function(e){if(e.matches)setMenu(false)});
   function count(el){var to=+el.dataset.n,suf=el.dataset.s,t0=null;
     (function f(t){t0=t0||t;var p=Math.min((t-t0)/1200,1);el.textContent=Math.round(to*p)+suf;if(p<1)requestAnimationFrame(f)})(performance.now())}
 })();
